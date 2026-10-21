@@ -13,8 +13,9 @@ effettuata per cognome e nome.
 L'elenco dei volontari viene importato dal file Excel dell'evento, che non subisce alcuna
 modifica. Al termine dell'evento l'applicativo produce il registro delle presenze compilato con
 gli orari di ciascuna giornata, nel rispetto della formattazione del file di origine.
-L'applicativo è distribuito come unico eseguibile, non richiede installazione né registrazione di
-account e conserva i dati esclusivamente sul computer della postazione.
+L'applicativo è distribuito come unico file di installazione, non richiede privilegi di
+amministratore né registrazione di account e conserva i dati esclusivamente sul computer della
+postazione.
 
 ## Funzionamento
 
@@ -213,8 +214,8 @@ Le operazioni di sostituzione, riapertura, chiusura ed eliminazione di un regist
 da password: l'accesso alla sezione **Eventi**, l'accesso alla sezione **Registro** in presenza
 di un evento in corso e la chiusura dell'evento. La password è definita al primo accesso, è
 conservata esclusivamente in forma di impronta crittografica e deve essere inserita una sola
-volta per sessione. La reimpostazione richiede l'eliminazione del file `Dati\passcode.json` dal
-computer della postazione.
+volta per sessione. La reimpostazione richiede l'eliminazione del file `passcode.json` dalla
+cartella `%LOCALAPPDATA%\RegistraPresenze` del computer della postazione.
 
 Le funzioni di scansione, ricerca, consultazione della situazione ed esportazione non richiedono
 la password, al fine di non ostacolare l'operatività della postazione. La protezione è
@@ -228,9 +229,10 @@ postazione. L'interfaccia è accessibile tramite browser, ma non è raggiungibil
 della rete. Non sono previsti account né servizi cloud: l'unica connessione effettuata è quella
 destinata allo scaricamento degli aggiornamenti.
 
-I dati sono conservati nella cartella `Dati`, collocata accanto all'eseguibile, che contiene il
-database `presenze.db`, i registri compilati (`export\`), le copie dei file caricati (`source\`)
-e il file di diagnostica.
+L'applicativo e i dati sono conservati nella cartella `%LOCALAPPDATA%\RegistraPresenze` dell'utente
+di Windows, che contiene il database `presenze.db`, i registri compilati (`export\`), le copie dei
+file caricati (`source\`), le copie di sicurezza del database (`backup\`) e il file di
+diagnostica.
 
 Ai fini della copia di sicurezza si raccomanda l'esportazione del registro. Il database opera in
 modalità WAL, per cui le registrazioni più recenti possono risiedere nel file `presenze.db-wal`:
@@ -259,13 +261,17 @@ Il lettore deve essere configurato in modalità **emulazione tastiera**, con **s
 
 ## Installazione
 
-1. Scaricare il file `RegistraPresenze.exe` dall'[ultima versione](../../releases/latest).
-2. Collocare il file in una cartella dedicata, dotata di permessi di scrittura, ad esempio
-   `Documenti\Registra Presenze`. Non è idonea la cartella `Programmi`, nella quale
-   l'applicativo non dispone dei permessi di scrittura.
-3. Avviare l'applicativo con un doppio clic. Al primo avvio vengono creati la cartella `Dati`,
-   accanto all'eseguibile, destinata a contenere tutti i dati registrati, e il collegamento
-   **Apri Registra Presenze** sul desktop, da utilizzare per gli avvii successivi.
+1. Scaricare il file `RegistraPresenzeInstaller.exe` dall'[ultima versione](../../releases/latest).
+2. Avviarlo con un doppio clic. L'applicativo viene installato nella cartella
+   `%LOCALAPPDATA%\RegistraPresenze` dell'utente, senza necessità di privilegi di amministratore;
+   sul desktop viene creato il collegamento **Apri Registra Presenze**, da utilizzare per gli
+   avvii successivi, e l'applicativo viene aperto.
+3. Il file scaricato può quindi essere eliminato.
+
+Qualora sul computer sia presente una versione precedente alla 0.12.0, i dati contenuti nella
+cartella `Dati` sono trasferiti automaticamente nella nuova posizione, e la vecchia cartella viene
+rimossa. Un'installazione esistente non viene in alcun caso sostituita con una versione meno
+recente.
 
 Al primo avvio Windows potrebbe segnalare un'applicazione non riconosciuta; in tal caso è
 sufficiente selezionare *Ulteriori informazioni* e successivamente *Esegui comunque*. La
@@ -284,7 +290,8 @@ e, in assenza di connessione, l'applicativo continua a funzionare regolarmente.
 
 ## Versioni firmate
 
-Ciascuna versione pubblicata comprende, oltre all'eseguibile, i file `manifest.json` e
+Ciascuna versione pubblicata comprende, oltre a `RegistraPresenzeInstaller.exe`, l'eseguibile
+`RegistraPresenze.exe`, destinato all'aggiornamento automatico, e i file `manifest.json` e
 `manifest.sig`. Il primo riporta versione, impronta e dimensione dell'eseguibile; il secondo ne
 costituisce la firma digitale. Un aggiornamento è installato soltanto se la firma risulta valida
 e l'eseguibile corrisponde all'impronta dichiarata. I due file non sono necessari ai fini
