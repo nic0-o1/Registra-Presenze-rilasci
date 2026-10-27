@@ -186,7 +186,8 @@ assegnato. L'operatore seleziona gli oggetti da consegnare e indica il recapito 
 postazione del volontario per la durata dell'evento.
 
 - L'inventario si costituisce alla prima consegna, ovvero può essere predisposto in anticipo,
-  anche mediante importazione da file Excel ([formato](#inventario-del-materiale)).
+  anche mediante importazione da file Excel ([formato](#inventario-del-materiale)), già al
+  caricamento del registro.
 - Consegne e rientri possono essere annullati.
 - Il materiale non restituito viene segnalato all'uscita del volontario e alla chiusura
   dell'evento.
