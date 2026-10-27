@@ -92,7 +92,8 @@ precompilati quando ricavabili dall'etichetta (ad esempio `08-12`). Gli eventual
 duplicati sono segnalati in fase di anteprima, senza esclusione di alcun volontario dall'elenco.
 
 Il file di origine non viene in alcun caso modificato: l'applicativo ne conserva una copia, dalla
-quale viene generato il registro compilato.
+quale viene generato il registro compilato. Un caricamento errato può essere annullato prima
+dell'avvio, purché l'evento non presenti ancora passaggi né consegne di materiale.
 
 ### Registrazione dei passaggi
 
@@ -199,21 +200,21 @@ dell'evento. Il materiale non compare nel registro delle presenze.
 ### Storico degli eventi
 
 Ciascun registro caricato rimane disponibile nella sezione **Eventi**, unitamente ai relativi
-volontari e passaggi. Il caricamento di un nuovo file determina la chiusura del registro
-precedente, senza cancellarlo. Per ciascun evento concluso è possibile:
+volontari e passaggi. Un nuovo file può essere caricato solo dopo la chiusura dell'evento in
+corso, che non comporta la cancellazione di alcun dato. Per ciascun evento concluso è possibile:
 
 - esportare il registro compilato in qualsiasi momento;
 - modificarne la denominazione;
-- riaprirlo per la registrazione di ulteriori passaggi, che riporteranno data e ora correnti;
+- riaprirlo per la registrazione di ulteriori passaggi, che riporteranno data e ora correnti,
+  purché nessun altro evento sia in corso;
 - eliminarlo definitivamente, unitamente a volontari, passaggi e materiale.
 
 Gli eventi conclusi sono consultabili in sola lettura fino all'eventuale riapertura.
 
 ### Protezione mediante password
 
-Le operazioni di sostituzione, riapertura, chiusura ed eliminazione di un registro sono protette
-da password: l'accesso alla sezione **Eventi**, l'accesso alla sezione **Registro** in presenza
-di un evento in corso e la chiusura dell'evento. La password è definita al primo accesso, è
+Le operazioni di riapertura, chiusura ed eliminazione di un registro sono protette da password:
+l'accesso alla sezione **Eventi** e la chiusura dell'evento. La password è definita al primo accesso, è
 conservata esclusivamente in forma di impronta crittografica e deve essere inserita una sola
 volta per sessione. La reimpostazione richiede l'eliminazione del file `passcode.json` dalla
 cartella `%LOCALAPPDATA%\RegistraPresenze` del computer della postazione.
