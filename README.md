@@ -28,6 +28,9 @@ postazione.
 3. **Chiusura dell'evento.** Prima della chiusura viene presentato l'elenco dei volontari privi
    di registrazione dell'uscita; successivamente viene generato il registro compilato, predisposto
    per il salvataggio e la stampa.
+4. **Chiusura della pagina.** In assenza di un evento in corso, l'applicativo termina
+   automaticamente entro alcuni minuti dalla chiusura della pagina. Con un evento in corso rimane
+   attivo, e il collegamento sul desktop riapre immediatamente la pagina.
 
 ## Formato dei file Excel
 
